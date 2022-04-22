@@ -47,5 +47,8 @@
     "ts-node": "^10.4.0",
     "eslint": "8.11.0",
     "eslint-config-next": "12.1.0"
+  },
+  "prisma": {
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
   }
 }
