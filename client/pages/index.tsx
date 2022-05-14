@@ -17,7 +17,7 @@ export default function Home({artists}) {
     // @ts-ignore
     title={`${user?.firstName} ${user?.lastName}`}
     description={`${user?.playlistsCount} public playlists`}
-    image="https://dl.dropboxusercontent.com/s/bgiv0ssz3xpotz9/peep.png?dl=0"
+    image={`https://picsum.photos/seed/picsum${Math.floor(Math.random()*400)}/400`}
   >
     <Box color="white" paddingX="40px">
       <Box marginBottom="40px">
@@ -31,7 +31,7 @@ export default function Home({artists}) {
           <Box paddingX="10px" width="20%">
             <Box bg="gray.900" borderRadius="4px" padding="15px" width="100%">
               <Image
-                src="https://placekitten.com/300/300"
+                src={`https://picsum.photos/seed/picsum${Math.floor(Math.random()*20)}/400`}
                 borderRadius="100%"
               />
               <Box marginTop="20px">
