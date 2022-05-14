@@ -51,8 +51,6 @@ const musicMenu = [
   },
 ];
 
-const playlists = new Array(30).fill(1).map((_, i) => `Playlist ${i + 1}`);
-
 const Sidebar = () => {
 
   const {playlists} = usePlaylist()
@@ -67,7 +65,7 @@ const Sidebar = () => {
     >
       <Box paddingY={"20px"} height="100%">
         <Box width={"120px"} marginBottom={"20px"} paddingX="20px">
-          <NextImage src="/trax.svg" height={60} width={120} />
+          <NextImage src="/chords-logo.png" height={60} width={120} />
         </Box>
         <Box marginBottom={"20px"}>
           <List spacing={2}>
