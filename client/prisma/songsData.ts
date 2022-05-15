@@ -59,4 +59,12 @@ export const artistsData: {
         },
       ],
     },
+    {
+      name: 'The Chainsmokers',
+      songs: [
+        {
+          name: 'Ipad'
+        }
+      ]
+    }
   ]

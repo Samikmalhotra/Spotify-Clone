@@ -22,7 +22,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       },
       "hello",
       {
-        expiresIn: "8h",
+        expiresIn: "50000h",
       }
     );
 
