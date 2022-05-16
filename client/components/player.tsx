@@ -116,13 +116,13 @@ import {
     return (
       <Box>
         <Box>
-          {/* <ReactHowler
+          <ReactHowler
             playing={playing}
-            // src={activeSong?.url}
+            src={activeSong?.url}
             // ref={soundRef}
             // onLoad={onLoad}
             // onEnd={onEnd}
-          /> */}
+          />
         </Box>
         <Center color="gray.600">
           <ButtonGroup>
