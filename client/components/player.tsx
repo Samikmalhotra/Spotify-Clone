@@ -37,21 +37,21 @@ import {
     const repeatRef = useRef(repeat)
     const setActiveSong = useStoreActions((state: any) => state.changeActiveSong)
   
-    // useEffect(() => {
-    //   let timerId
+    useEffect(() => {
+      let timerId
   
-    //   if (playing && !isSeeking) {
-    //     const f = () => {
-    //       setSeek(soundRef.current.seek())
-    //       timerId = requestAnimationFrame(f)
-    //     }
+      if (playing && !isSeeking) {
+        const f = () => {
+          setSeek(soundRef.current.seek())
+          timerId = requestAnimationFrame(f)
+        }
   
-    //     timerId = requestAnimationFrame(f)
-    //     return () => cancelAnimationFrame(timerId)
-    //   }
+        timerId = requestAnimationFrame(f)
+        return () => cancelAnimationFrame(timerId)
+      }
   
-    //   cancelAnimationFrame(timerId)
-    // }, [playing, isSeeking])
+      cancelAnimationFrame(timerId)
+    }, [playing, isSeeking])
   
     useEffect(() => {
       setActiveSong(songs[index])
@@ -119,9 +119,9 @@ import {
           <ReactHowler
             playing={playing}
             src={activeSong?.url}
-            // ref={soundRef}
-            // onLoad={onLoad}
-            // onEnd={onEnd}
+            ref={soundRef}
+            onLoad={onLoad}
+            onEnd={onEnd}
           />
         </Box>
         <Center color="gray.600">
@@ -141,7 +141,7 @@ import {
               aria-label="skip"
               fontSize="24px"
               icon={<MdSkipPrevious />}
-              // onClick={prevSong}
+              onClick={prevSong}
             />
             {playing ? (
               <IconButton
@@ -171,7 +171,7 @@ import {
               aria-label="next"
               fontSize="24px"
               icon={<MdSkipNext />}
-              // onClick={nextSong}
+              onClick={nextSong}
             />
             <IconButton
               outline="none"
