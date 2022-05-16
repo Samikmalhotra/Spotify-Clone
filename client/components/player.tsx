@@ -118,10 +118,10 @@ import {
         <Box>
           {/* <ReactHowler
             playing={playing}
-            src={activeSong?.url}
-            ref={soundRef}
-            onLoad={onLoad}
-            onEnd={onEnd}
+            // src={activeSong?.url}
+            // ref={soundRef}
+            // onLoad={onLoad}
+            // onEnd={onEnd}
           /> */}
         </Box>
         <Center color="gray.600">
@@ -132,7 +132,7 @@ import {
               aria-label="shuffle"
               fontSize="24px"
               color={shuffle ? 'white' : 'gray.600'}
-              // onClick={onShuffle}
+              onClick={onShuffle}
               icon={<MdShuffle />}
             />
             <IconButton
@@ -143,7 +143,7 @@ import {
               icon={<MdSkipPrevious />}
               // onClick={prevSong}
             />
-            {/* {playing ? ( */}
+            {playing ? (
               <IconButton
                 outline="none"
                 variant="link"
@@ -153,7 +153,7 @@ import {
                 icon={<MdOutlinePauseCircleFilled />}
                 onClick={() => setPlayState(false)}
               />
-            {/* // ) : ( */}
+             ) : (
               <IconButton
                 outline="none"
                 variant="link"
@@ -163,7 +163,7 @@ import {
                 icon={<MdOutlinePlayCircleFilled />}
                 onClick={() => setPlayState(true)}
               />
-            {/* )} */}
+            )}
   
             <IconButton
               outline="none"
@@ -179,7 +179,7 @@ import {
               aria-label="repeat"
               fontSize="24px"
               color={repeat ? 'white' : 'gray.600'}
-              // onClick={onRepeat}
+              onClick={onRepeat}
               icon={<MdOutlineRepeat />}
             />
           </ButtonGroup>

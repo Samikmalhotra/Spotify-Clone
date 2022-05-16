@@ -18,7 +18,7 @@ const PlayerBar = () => {
                 {/* {activeSong.artist.name} */} Artist Name
                 </Text>
           </Box>
-        ) 
+        {/* )  */}
         {/* : null} */}
         <Box width="40%">
           {/* {activeSong ?  */}
