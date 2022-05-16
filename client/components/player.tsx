@@ -37,21 +37,21 @@ import {
     const repeatRef = useRef(repeat)
     const setActiveSong = useStoreActions((state: any) => state.changeActiveSong)
   
-    useEffect(() => {
-      let timerId
+    // useEffect(() => {
+    //   let timerId
   
-      if (playing && !isSeeking) {
-        const f = () => {
-          setSeek(soundRef.current.seek())
-          timerId = requestAnimationFrame(f)
-        }
+    //   if (playing && !isSeeking) {
+    //     const f = () => {
+    //       setSeek(soundRef.current.seek())
+    //       timerId = requestAnimationFrame(f)
+    //     }
   
-        timerId = requestAnimationFrame(f)
-        return () => cancelAnimationFrame(timerId)
-      }
+    //     timerId = requestAnimationFrame(f)
+    //     return () => cancelAnimationFrame(timerId)
+    //   }
   
-      cancelAnimationFrame(timerId)
-    }, [playing, isSeeking])
+    //   cancelAnimationFrame(timerId)
+    // }, [playing, isSeeking])
   
     useEffect(() => {
       setActiveSong(songs[index])
@@ -116,13 +116,13 @@ import {
     return (
       <Box>
         <Box>
-          <ReactHowler
+          {/* <ReactHowler
             playing={playing}
             src={activeSong?.url}
             ref={soundRef}
             onLoad={onLoad}
             onEnd={onEnd}
-          />
+          /> */}
         </Box>
         <Center color="gray.600">
           <ButtonGroup>
@@ -132,7 +132,7 @@ import {
               aria-label="shuffle"
               fontSize="24px"
               color={shuffle ? 'white' : 'gray.600'}
-              onClick={onShuffle}
+              // onClick={onShuffle}
               icon={<MdShuffle />}
             />
             <IconButton
@@ -141,9 +141,9 @@ import {
               aria-label="skip"
               fontSize="24px"
               icon={<MdSkipPrevious />}
-              onClick={prevSong}
+              // onClick={prevSong}
             />
-            {playing ? (
+            {/* {playing ? ( */}
               <IconButton
                 outline="none"
                 variant="link"
@@ -153,7 +153,7 @@ import {
                 icon={<MdOutlinePauseCircleFilled />}
                 onClick={() => setPlayState(false)}
               />
-            ) : (
+            {/* // ) : ( */}
               <IconButton
                 outline="none"
                 variant="link"
@@ -163,7 +163,7 @@ import {
                 icon={<MdOutlinePlayCircleFilled />}
                 onClick={() => setPlayState(true)}
               />
-            )}
+            {/* )} */}
   
             <IconButton
               outline="none"
@@ -171,7 +171,7 @@ import {
               aria-label="next"
               fontSize="24px"
               icon={<MdSkipNext />}
-              onClick={nextSong}
+              // onClick={nextSong}
             />
             <IconButton
               outline="none"
@@ -179,7 +179,7 @@ import {
               aria-label="repeat"
               fontSize="24px"
               color={repeat ? 'white' : 'gray.600'}
-              onClick={onRepeat}
+              // onClick={onRepeat}
               icon={<MdOutlineRepeat />}
             />
           </ButtonGroup>
