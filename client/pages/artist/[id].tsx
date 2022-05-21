@@ -1,6 +1,5 @@
 import GradientLayout from "../../components/gradientLayout";
 import SongTable from "../../components/songTable";
-import { validateToken } from "../../lib/auth";
 import prisma from "../../lib/prisma";
 import { getBGColor } from "../playlist/[id]";
 
@@ -21,7 +20,7 @@ const Artist = ({ artist }) => {
   );
 };
 
-export const getServerSideProps = async ({ query, req }) => {
+export const getServerSideProps = async ({ query }) => {
 
   const [artist] = await prisma.artist.findMany({
     where: {
