@@ -1,8 +1,21 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, Song } from "@prisma/client";
 import bcrypt from "bcrypt";
 import { artistsData } from "./songsData";
 
 const prisma = new PrismaClient();
+
+
+const uniqueSongs = async(songs: Song[]) =>{
+    const songArr = []
+    for(let i = 0; i < 10; i++){
+      const rand = Math.floor(Math.random() * songs.length)
+      const song = songs[rand]
+      if(!songArr.includes(song)){
+        songArr.push(song)
+      }
+    }
+    return songArr
+}
 
 const run = async () => {
   await Promise.all(
@@ -11,12 +24,13 @@ const run = async () => {
         where: { name: artist.name },
         update: {},
         create: {
-          name: artist.name,
+          name: artist.name? artist.name : "",
           songs: {
             create: artist.songs.map((song) => ({
-              name: song.name,
-              duration: song.duration,
-              url: song.url,
+              name: song.name? song.name : "",
+              duration: song.duration? song.duration : 0,
+              url: song.url? song.url : "",
+              cover: song.cover? song.cover : "https://picsum.photos/200",
             })),
           },
         },
@@ -26,30 +40,32 @@ const run = async () => {
 
   const salt = bcrypt.genSaltSync();
   const user = await prisma.user.upsert({
-    where: { email: "user@test.com" },
+    where: { email: "test@test.com" },
     update: {},
     create: {
-        email: 'user@test.com',
+        email: 'test@test.com',
         password: bcrypt.hashSync('password', salt),
-        firstName: "ABCD",
-        lastName: "EFGH"
+        firstName: "Test",
+        lastName: "Test"
     },
   });
 
+  const playlistArr = ["daily vibes","all day every day","3 am","nostalgia","stars","i saw you in a dream","imaginary car chase music","strong enough","summer nights","playlit"]
+
   const songs = await prisma.song.findMany({})
   await Promise.all(new Array(10).fill(1).map(async(_,i)=>{
+      const songsToAdd = await uniqueSongs(songs)
       return prisma.playlist.create({
           data: {
-            name: `Playlist ${i+1}`,
+            name: playlistArr[i],
             user:{
                 connect: { id: user.id},
             },
             songs: {
-                connect: songs.map(song=>({
+                connect: songsToAdd.map(song=>({
                     id: song.id
                 })),
             }
-
           }
       })
   }))

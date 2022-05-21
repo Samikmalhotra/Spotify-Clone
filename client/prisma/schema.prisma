@@ -32,6 +32,7 @@ model Song {
   playlists Playlist[]
   duration  Int
   url       String
+  cover     String     @default("https://picsum.photos/200")
 }
 
 model Artist {
