@@ -80,7 +80,7 @@ const Sidebar = () => {
                           as={menu.icon}
                           color="white"
                           marginRight="20px"
-                        ></ListIcon>
+                        />
                         {menu.name}
                       </LinkOverlay>
                     </NextLink>
@@ -102,7 +102,7 @@ const Sidebar = () => {
                           as={item.icon}
                           color="white"
                           marginRight="20px"
-                        ></ListIcon>
+                        />
                         {item.name}
                       </LinkOverlay>
                     </NextLink>
