@@ -1,9 +1,18 @@
 import { Box, Flex } from "@chakra-ui/layout";
-import { Table, Thead, Td, Tr, Tbody, Th, IconButton, Image } from "@chakra-ui/react";
+import {
+  Table,
+  Thead,
+  Td,
+  Tr,
+  Tbody,
+  Th,
+  IconButton,
+  Image,
+} from "@chakra-ui/react";
 import { BsFillPlayFill } from "react-icons/bs";
 import { AiOutlineClockCircle } from "react-icons/ai";
-import { formatDate, formatTime } from "../lib/formatter";
 import { useStoreActions } from "easy-peasy";
+import { formatDate, formatTime } from "../lib/formatter";
 
 const SongTable = ({ songs }) => {
   const playSongs = useStoreActions((store: any) => store.changeActiveSongs);
@@ -53,13 +62,20 @@ const SongTable = ({ songs }) => {
                   onClick={() => handlePlay(song)}
                 >
                   <Td>
-                    <Flex alignItems={"end"}>
-                    {i + 1}
-                    </Flex></Td>
+                    <Flex alignItems="end">{i + 1}</Flex>
+                  </Td>
                   <Td>
-                    <Flex align={"end"} padding={0} margin={0}> 
-                      <Image src={song.cover} boxSize="35px" boxShadow="2xl" marginRight="20px" top="10px" position={"relative"}/>
-                      {song.name}</Flex>
+                    <Flex align="end" padding={0} margin={0}>
+                      <Image
+                        src={song.cover}
+                        boxSize="35px"
+                        boxShadow="2xl"
+                        marginRight="20px"
+                        top="10px"
+                        position="relative"
+                      />
+                      {song.name}
+                    </Flex>
                   </Td>
                   <Td>{formatDate(song.createdAt)}</Td>
                   <Td>{formatTime(song.duration)}</Td>

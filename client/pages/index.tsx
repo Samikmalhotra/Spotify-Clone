@@ -1,18 +1,15 @@
+import { Box, Flex, Text } from "@chakra-ui/layout";
+import { Image } from "@chakra-ui/react";
+import NextLink from "next/link";
 import GradientLayout from "../components/gradientLayout";
 import prisma from "../lib/prisma";
-import { Box, Flex, LinkBox, Text } from "@chakra-ui/layout";
-import { Image } from "@chakra-ui/react";
 import { useMe } from "../lib/hooks";
-import NextLink from "next/link";
 
-export default function Home({ artists }) {
-  const { user, isError } = useMe();
+const Home = ({ artists }) => {
+  const { user } = useMe();
   // const moreNewArtists = artists.filter((artist, index) => index < 5);
   const moreNewArtists = artists.filter((artist) => {
     return artist && artist.songs && artist.songs.length > 17;
-  });
-  const newArtists = artists.filter(function (_, i) {
-    return !(i % 180);
   });
   return (
     <GradientLayout
@@ -48,7 +45,7 @@ export default function Home({ artists }) {
                   borderRadius="4px"
                   padding="15px"
                   width="100%"
-                  _hover={{transform: "scale(1.05)"}}
+                  _hover={{ transform: "scale(1.05)" }}
                 >
                   <Image
                     src={`https://picsum.photos/seed/picsum${Math.floor(
@@ -68,7 +65,8 @@ export default function Home({ artists }) {
       </Box>
     </GradientLayout>
   );
-}
+};
+export default Home;
 
 export const getServerSideProps = async () => {
   const artists = await prisma.artist.findMany({

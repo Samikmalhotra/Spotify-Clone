@@ -1,7 +1,6 @@
 import { Box, Flex, Input, Button } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { FC, Fragment, useState } from "react";
-import { useSWRConfig } from "swr";
+import { FC, useState } from "react";
 import NextImage from "next/image";
 import { auth } from "../lib/mutations";
 
@@ -36,7 +35,7 @@ const AuthForm: FC<{ mode: "signin" | "signup" }> = ({ mode }) => {
         <Box padding="50px" bg="gray.900" borderRadius="6px">
           <form onSubmit={handleSubmit}>
             {mode === "signup" && (
-              <Fragment>
+              <>
                 <Input
                   placeholder="First Name"
                   type="text"
@@ -47,7 +46,7 @@ const AuthForm: FC<{ mode: "signin" | "signup" }> = ({ mode }) => {
                   type="text"
                   onChange={(e) => setLastName(e.target.value)}
                 />
-              </Fragment>
+              </>
             )}
 
             <Input

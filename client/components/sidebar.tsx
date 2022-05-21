@@ -5,7 +5,6 @@ import {
   ListItem,
   ListIcon,
   Divider,
-  Center,
   LinkBox,
   LinkOverlay,
 } from "@chakra-ui/layout";
@@ -57,21 +56,21 @@ const Sidebar = () => {
 
   return (
     <Box
-      width={"100%"}
+      width="100%"
       height="calc(100vh - 100px)"
       bg="black"
-      paddingX={"5px"}
+      paddingX="5px"
       color="gray"
     >
-      <Box paddingY={"20px"} height="100%">
-        <Box width={"120px"} marginBottom={"20px"} paddingX="20px">
+      <Box paddingY="20px" height="100%">
+        <Box width="120px" marginBottom="20px" paddingX="20px">
           <NextImage src="/chords-logo.png" height={60} width={120} />
         </Box>
-        <Box marginBottom={"20px"}>
+        <Box marginBottom="20px">
           <List spacing={2}>
             {navMenu.map((menu) => {
               return (
-                <ListItem paddingX={"20px"} fontSize={"16px"} key={menu.name}>
+                <ListItem paddingX="20px" fontSize="16px" key={menu.name}>
                   <LinkBox>
                     <NextLink href={{
                       pathname: menu.route,
@@ -80,7 +79,7 @@ const Sidebar = () => {
                         <ListIcon
                           as={menu.icon}
                           color="white"
-                          marginRight={"20px"}
+                          marginRight="20px"
                         ></ListIcon>
                         {menu.name}
                       </LinkOverlay>
@@ -91,18 +90,18 @@ const Sidebar = () => {
             })}
           </List>
         </Box>
-        <Box marginTop={"20px"}>
+        <Box marginTop="20px">
           <List spacing={2}>
             {musicMenu.map((item) => {
               return (
-                <ListItem paddingX="20px" fontSize={"16px"} key={item.name}>
+                <ListItem paddingX="20px" fontSize="16px" key={item.name}>
                   <LinkBox>
                     <NextLink href={item.route} passHref>
                       <LinkOverlay>
                         <ListIcon
                           as={item.icon}
                           color="white"
-                          marginRight={"20px"}
+                          marginRight="20px"
                         ></ListIcon>
                         {item.name}
                       </LinkOverlay>
@@ -113,8 +112,8 @@ const Sidebar = () => {
             })}
           </List>
         </Box>
-        <Divider bg="gray.600" marginY={"20px"} />
-        <Box height={"50%"} overflowY="auto" paddingY="20px">
+        <Divider bg="gray.600" marginY="20px" />
+        <Box height="50%" overflowY="auto" paddingY="20px">
           <List spacing={2}>
             {playlists && playlists.map((playlist) => {
               return (

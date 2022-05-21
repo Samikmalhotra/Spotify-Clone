@@ -29,7 +29,7 @@ import {
       songs.findIndex((s) => s.id === activeSong.id)
     )
     const [seek, setSeek] = useState(0.0)
-    const [volume, setVolume] = useState(0.5)
+    // const [volume, setVolume] = useState(0.5)
     const [isSeeking, setIsSeeking] = useState(false)
     const [repeat, setRepeat] = useState(false)
     const [shuffle, setShuffle] = useState(false)
@@ -114,10 +114,10 @@ import {
       soundRef.current.seek(e[0])
     }
 
-    const onVolume = (e) => {
-      setVolume(parseFloat(e[0]))
-      soundRef.current.volume(e[0])
-    }
+    // const onVolume = (e) => {
+    //   setVolume(parseFloat(e[0]))
+    //   soundRef.current.volume(e[0])
+    // }
   
     return (
       <Box>

@@ -1,3 +1,4 @@
+import next from "next";
 import prisma from "../../lib/prisma";
 import { validateRoute } from "../../lib/auth";
 

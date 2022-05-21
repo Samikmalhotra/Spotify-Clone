@@ -5,12 +5,12 @@ import prisma from "../../lib/prisma";
 import { getBGColor } from "../playlist/[id]";
 
 const Artist = ({ artist }) => {
-  const color = artist ? getBGColor(artist.id) : "gray";
+  const color = artist ? getBGColor() : "gray";
 
   return (
     <GradientLayout
       color={color || "black"}
-      roundImage={true}
+      roundImage
       title={artist ? artist.name : "Artist"}
       subtitle="artist"
       description={`${artist && artist.songs.length} songs`}
@@ -22,18 +22,6 @@ const Artist = ({ artist }) => {
 };
 
 export const getServerSideProps = async ({ query, req }) => {
-  let user;
-
-  try {
-    user = validateToken(req.cookies.CHORDS_ACCESS_TOKEN);
-  } catch (e) {
-    return {
-      redirect: {
-        permanent: false,
-        destination: "/signin",
-      },
-    };
-  }
 
   const [artist] = await prisma.artist.findMany({
     where: {

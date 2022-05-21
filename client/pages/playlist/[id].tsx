@@ -5,7 +5,7 @@ import { validateToken } from "../../lib/auth";
 // import { validateToken } from '../../lib/auth'
 import prisma from "../../lib/prisma";
 
-export const getBGColor = (id) => {
+export const getBGColor = () => {
   const colors = [
     "red",
     "green",
@@ -21,7 +21,7 @@ export const getBGColor = (id) => {
 };
 
 const Playlist = ({ playlist }) => {
-  const color = playlist ? getBGColor(playlist.id) : "gray";
+  const color = playlist ? getBGColor() : "gray";
 
   console.log(playlist);
 
