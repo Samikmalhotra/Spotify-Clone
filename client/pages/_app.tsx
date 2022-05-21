@@ -1,4 +1,5 @@
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
+import Head from "next/head"
 import "reset-css";
 import PlayerLayout from "../components/playerLayout";
 import { StoreProvider } from "easy-peasy";
@@ -36,6 +37,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <ChakraProvider theme={theme}>
       <StoreProvider store={store}>
+        <Head><title>Chords</title></Head>
         {Component.authPage ? (
           <Component {...pageProps} />
         ) : (

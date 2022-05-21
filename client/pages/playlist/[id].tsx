@@ -5,7 +5,7 @@ import { validateToken } from "../../lib/auth";
 // import { validateToken } from '../../lib/auth'
 import prisma from "../../lib/prisma";
 
-const getBGColor = (id) => {
+export const getBGColor = (id) => {
   const colors = [
     "red",
     "green",
@@ -17,7 +17,7 @@ const getBGColor = (id) => {
     "yellow",
   ];
 
-  return colors[id - 1] || colors[Math.floor(Math.random() * colors.length)];
+  return colors[Math.floor(Math.random() * colors.length)];
 };
 
 const Playlist = ({ playlist }) => {
