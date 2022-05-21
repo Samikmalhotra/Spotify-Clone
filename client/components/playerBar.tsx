@@ -1,5 +1,6 @@
 import { Box, Flex, Text } from "@chakra-ui/layout";
 import { Image } from "@chakra-ui/react";
+import NextLink from "next/link";
 
 import { useStoreState } from "easy-peasy";
 import Player from "./player";
@@ -14,10 +15,23 @@ const PlayerBar = () => {
         {activeSong ? (
           <Box padding="20px" color="white" width="30%">
             <Flex>
-              <Image src={activeSong.cover} boxSize="50px" boxShadow="2xl" marginRight="20px"/>
+              <Image
+                src={activeSong.cover}
+                boxSize="50px"
+                boxShadow="2xl"
+                marginRight="20px"
+              />
               <Box>
                 <Text fontSize="large">{activeSong.name}</Text>
-                <Text fontSize="sm">{activeSong.artist.name}</Text>
+                <NextLink
+                  href={{
+                    pathname: `/artist/[id]`,
+                    query: { id: activeSong.artist.id },
+                  }}
+                  passHref
+                >
+                  <Text fontSize="sm" _hover={{textDecoration: "underline"}}>{activeSong.artist.name}</Text>
+                </NextLink>
               </Box>
             </Flex>
           </Box>
