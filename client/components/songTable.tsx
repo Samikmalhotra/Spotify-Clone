@@ -1,18 +1,18 @@
-import { Box } from "@chakra-ui/layout";
-import { Table, Thead, Td, Tr, Tbody, Th, IconButton } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/layout";
+import { Table, Thead, Td, Tr, Tbody, Th, IconButton, Image } from "@chakra-ui/react";
 import { BsFillPlayFill } from "react-icons/bs";
 import { AiOutlineClockCircle } from "react-icons/ai";
 import { formatDate, formatTime } from "../lib/formatter";
-import { useStoreActions } from 'easy-peasy'
+import { useStoreActions } from "easy-peasy";
 
-const SongTable = ({songs}) => {
-  const playSongs = useStoreActions((store:any)=>store.changeActiveSongs)
-  const setActiveSong = useStoreActions((store:any)=>store.changeActiveSong)
+const SongTable = ({ songs }) => {
+  const playSongs = useStoreActions((store: any) => store.changeActiveSongs);
+  const setActiveSong = useStoreActions((store: any) => store.changeActiveSong);
 
   const handlePlay = (activeSong?) => {
-    setActiveSong(activeSong || songs[0])
-    playSongs(songs) 
-  }
+    setActiveSong(activeSong || songs[0]);
+    playSongs(songs);
+  };
 
   return (
     <Box bg="transparent" color="white">
@@ -39,24 +39,32 @@ const SongTable = ({songs}) => {
             </Tr>
           </Thead>
           <Tbody>
-            {songs && songs.map((song, i) => (
-              <Tr
-                sx={{
-                  transition: "all .3s ",
-                  "&:hover": {
-                    bg: "rgba(255,255,255, 0.1)",
-                  },
-                }}
-                key={song.id}
-                cursor="pointer"
-                onClick={() => handlePlay(song)}
-              >
-                <Td>{i + 1}</Td>
-                <Td>{song.name}</Td>
-                <Td>{formatDate(song.createdAt)}</Td>
-                <Td>{formatTime(song.duration)}</Td>
-              </Tr>
-            ))}
+            {songs &&
+              songs.map((song, i) => (
+                <Tr
+                  sx={{
+                    transition: "all .3s ",
+                    "&:hover": {
+                      bg: "rgba(255,255,255, 0.1)",
+                    },
+                  }}
+                  key={song.id}
+                  cursor="pointer"
+                  onClick={() => handlePlay(song)}
+                >
+                  <Td>
+                    <Flex alignItems={"end"}>
+                    {i + 1}
+                    </Flex></Td>
+                  <Td>
+                    <Flex align={"end"} padding={0} margin={0}> 
+                      <Image src={song.cover} boxSize="35px" boxShadow="2xl" marginRight="20px" top="10px" position={"relative"}/>
+                      {song.name}</Flex>
+                  </Td>
+                  <Td>{formatDate(song.createdAt)}</Td>
+                  <Td>{formatTime(song.duration)}</Td>
+                </Tr>
+              ))}
           </Tbody>
         </Table>
       </Box>

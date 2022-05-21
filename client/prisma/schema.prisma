@@ -32,7 +32,7 @@ model Song {
   playlists Playlist[]
   duration  Int
   url       String
-  cover     String     @default("https://picsum.photos/200")
+  cover     String     @default("https://picsum.photos/seed/picsum")
 }
 
 model Artist {

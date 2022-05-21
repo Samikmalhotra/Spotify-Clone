@@ -116,7 +116,7 @@ const Sidebar = () => {
           <List spacing={2}>
             {playlists && playlists.map((playlist) => {
               return (
-                <ListItem paddingX="20px" key={playlist}>
+                <ListItem paddingX="20px" key={playlist.id}>
                   <LinkBox>
                     <NextLink href={{
                       pathname: `/playlist/[id]`,

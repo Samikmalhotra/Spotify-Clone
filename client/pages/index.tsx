@@ -9,6 +9,7 @@ import { useMe } from '../lib/hooks'
 
 export default function Home({artists}) {
   const { user, isError } = useMe()
+  const newArtists = artists.filter(function(_,i){ return !(i%180) })
   return (
     <GradientLayout
     roundImage
@@ -27,7 +28,7 @@ export default function Home({artists}) {
         <Text fontSize="md">only visible to you</Text>
       </Box>
       <Flex>
-        {artists.map((artist) => (
+        {newArtists.map((artist) => (
           <Box paddingX="10px" width="20%">
             <Box bg="gray.900" borderRadius="4px" padding="15px" width="100%">
               <Image
