@@ -21,7 +21,6 @@ const Artist = ({ artist }) => {
 };
 
 export const getServerSideProps = async ({ query }) => {
-
   const [artist] = await prisma.artist.findMany({
     where: {
       id: +query.id,
@@ -42,7 +41,7 @@ export const getServerSideProps = async ({ query }) => {
 
   return {
     props: {
-      artist,
+      artist: JSON.parse(JSON.stringify(artist)),
     },
   };
 };

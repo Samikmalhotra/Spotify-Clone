@@ -103,6 +103,8 @@ export const getServerSideProps = async ({ req }) => {
   });
 
   return {
-    props: { playlists },
+    props: {
+      playlists: JSON.parse(JSON.stringify(playlists)),
+    },
   };
 };

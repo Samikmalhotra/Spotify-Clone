@@ -4,6 +4,7 @@ import Head from "next/head";
 import "reset-css";
 import PlayerLayout from "../components/playerLayout";
 import { store } from "../lib/store";
+import "../styles/globals.css";
 
 const theme = extendTheme({
   colors: {
@@ -37,19 +38,19 @@ const MyApp = ({ Component, pageProps }) => {
   return (
     <ChakraProvider theme={theme}>
       <StoreProvider store={store}>
-        <Head>
-          <title>Chords</title>
-        </Head>
-        {Component.authPage ? (
-          <Component {...pageProps} />
-        ) : (
-          <PlayerLayout>
+          <Head>
+            <title>Chords</title>
+          </Head>
+          {Component.authPage ? (
             <Component {...pageProps} />
-          </PlayerLayout>
-        )}
+          ) : (
+            <PlayerLayout>
+              <Component {...pageProps} />
+            </PlayerLayout>
+          )}
       </StoreProvider>
     </ChakraProvider>
   );
-}
+};
 
 export default MyApp;

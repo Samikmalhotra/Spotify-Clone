@@ -73,7 +73,9 @@ export const getServerSideProps = async ({ query, req }) => {
   });
 
   return {
-    props: { playlist },
+    props: {
+      playlist: JSON.parse(JSON.stringify(playlist)),
+    },
   };
 };
 export default Playlist;

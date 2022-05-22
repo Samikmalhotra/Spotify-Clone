@@ -4,6 +4,7 @@ import NextLink from "next/link";
 import GradientLayout from "../components/gradientLayout";
 import prisma from "../lib/prisma";
 import { useMe } from "../lib/hooks";
+import { getBGColor } from "./playlist/[id]";
 
 const Home = ({ artists }) => {
   const { user } = useMe();
@@ -11,10 +12,11 @@ const Home = ({ artists }) => {
   const moreNewArtists = artists.filter((artist) => {
     return artist && artist.songs && artist.songs.length > 17;
   });
+
   return (
     <GradientLayout
       roundImage
-      color="blue"
+      color={getBGColor()}
       subtitle="profile"
       // @ts-ignore
       title={`${user?.firstName} ${user?.lastName}`}
@@ -85,6 +87,8 @@ export const getServerSideProps = async () => {
   });
 
   return {
-    props: { artists },
+    props: {
+      artists: JSON.parse(JSON.stringify(artists)),
+    },
   };
 };

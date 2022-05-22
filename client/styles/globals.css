@@ -14,3 +14,11 @@ a {
 * {
   box-sizing: border-box;
 }
+
+::-webkit-scrollbar-track {
+  background: #ee0707 !important; 
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(250, 4, 4) !important; 
+}
