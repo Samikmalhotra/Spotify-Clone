@@ -26,11 +26,11 @@ const GradientLayout = ({
           />
         </Box>
         <Box padding="20px" lineHeight="40px" color="white">
-          <Text fontSize="x-small" fontWeight="bold" casing="uppercase">
+          <Text fontSize="2x1" fontWeight="bold" casing="uppercase">
             {subtitle}
           </Text>
           <Text fontSize="6xl">{title}</Text>
-          <Text fontSize="x-small">{description}</Text>
+          <Text fontSize="2x1">{description}</Text>
         </Box>
       </Flex>
       <Box paddingY="50px">{children}</Box>
