@@ -8,13 +8,16 @@ import {
   Th,
   IconButton,
   Image,
+  Button,
 } from "@chakra-ui/react";
 import { BsFillPlayFill } from "react-icons/bs";
 import { AiOutlineClockCircle } from "react-icons/ai";
 import { useStoreActions } from "easy-peasy";
 import { formatDate, formatTime } from "../lib/formatter";
+import { useToast } from "@chakra-ui/react";
+import axios from "axios";
 
-const SongTable = ({ songs }) => {
+const SongTable = ({ songs, add = false, playlistId = null }) => {
   const newSongs = [];
   songs.map((song) => {
     const found = newSongs.find((s) => s.name === song.name);
@@ -28,9 +31,39 @@ const SongTable = ({ songs }) => {
   const playSongs = useStoreActions((store: any) => store.changeActiveSongs);
   const setActiveSong = useStoreActions((store: any) => store.changeActiveSong);
 
+  const toast = useToast();
+
   const handlePlay = (activeSong?) => {
     setActiveSong(activeSong || songs[0]);
     playSongs(songs);
+  };
+
+
+  const addSong = async (song) => {
+    const body = {
+      playlistId: playlistId,
+      songId: song.id,
+    };
+
+    try {
+      const res = await axios.post(`/api/addToPlaylist`, body);
+      console.log(res.data)
+      toast({
+        title: "Song added",
+        description: `We've added ${song.name} to your playlist`,
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+      });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: error.message,
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+    }
   };
 
   return (
@@ -55,6 +88,7 @@ const SongTable = ({ songs }) => {
               <Th>
                 <AiOutlineClockCircle />
               </Th>
+              {add ? <Th>Add</Th> : null}
             </Tr>
           </Thead>
           <Tbody>
@@ -89,6 +123,20 @@ const SongTable = ({ songs }) => {
                   </Td>
                   <Td>{formatDate(song.createdAt)}</Td>
                   <Td>{formatTime(song.duration)}</Td>
+                  {add ? (
+                    <Td>
+                      <Button
+                        variant={"outline"}
+                        _hover={{ color: "black", background: "white" }}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          addSong(song);
+                        }}
+                      >
+                        Add to Playlist
+                      </Button>
+                    </Td>
+                  ) : null}
                 </Tr>
               ))}
           </Tbody>

@@ -1,9 +1,14 @@
+import { Button, Center, Input } from "@chakra-ui/react";
+import { Fragment, useState } from "react";
 import GradientLayout from "../../components/gradientLayout";
 import SongTable from "../../components/songTable";
 import { validateToken } from "../../lib/auth";
 // import SongTable from '../../components/songsTable'
 // import { validateToken } from '../../lib/auth'
 import prisma from "../../lib/prisma";
+import Search from "../search";
+import { Box } from "@chakra-ui/layout";
+import axios from "axios"
 
 export const getBGColor = () => {
   const colors = [
@@ -22,8 +27,39 @@ export const getBGColor = () => {
 
 const Playlist = ({ playlist }) => {
   const color = playlist ? getBGColor() : "gray";
+  const [addStage, setAddStage] = useState(false);
 
-  console.log(playlist);
+  const [search, setSearch] = useState("");
+  const [results, setResults] = useState([]);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  console.log(search);
+
+  const changeHandler = async (search) => {
+    setSearch(search);
+  };
+
+  const clickHandler = async () => {
+    setLoading(true);
+
+    const body = {
+      songData: `${search}`,
+    };
+
+    try {
+      const res = await axios.post(
+        `${window.location.origin}/api/search`,
+        body
+      );
+      console.log(res.data);
+      setResults(res.data);
+      setLoading(false);
+    } catch (error) {
+      setError(error.response.data.error);
+      setLoading(false);
+    }
+  };
 
   return (
     <GradientLayout
@@ -34,7 +70,57 @@ const Playlist = ({ playlist }) => {
       description={`${playlist && playlist.songs.length} songs`}
       image={`https://picsum.photos/400?random=${playlist && playlist.id}`}
     >
-      <SongTable songs={playlist.songs} />
+      {addStage ? (
+        <Fragment>
+          <Box>
+            <Input
+              padding="30px"
+              margin="30px"
+              width="70%"
+              marginLeft="50px"
+              bgColor="black"
+              border="none"
+              color="white"
+              onChange={(e) => {
+                e.preventDefault;
+                changeHandler(e.target.value);
+              }}
+            />
+            <Button isLoading={loading} onClick={clickHandler}>
+              Search
+            </Button>
+            {error ? <h4>No Songs found</h4> : <SongTable songs={results} add={true} playlistId={playlist.id} />}
+          </Box>
+        </Fragment>
+      ) : (
+        <SongTable songs={playlist.songs} />
+      )}
+      {addStage ? (
+        <Center>
+          <Button
+            margin="30px"
+            onClick={(e) => {
+              e.preventDefault;
+              setAddStage(false);
+            }}
+          >
+            Go back
+          </Button>
+        </Center>
+      ) : (
+        <Center>
+          <Button
+            onClick={(e) => {
+              e.preventDefault;
+              setAddStage(true);
+            }}
+          >
+            Add to playlist
+          </Button>
+        </Center>
+      )}
+
+      <br />
     </GradientLayout>
   );
 };
