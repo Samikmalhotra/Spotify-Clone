@@ -19,7 +19,7 @@ const Home = ({ artists }) => {
       color={getBGColor()}
       subtitle="profile"
       // @ts-ignore
-      title={`${user?.firstName} ${user?.lastName}`}
+      title={`${user?.firstName} ${user?.lastName}` || "Loading..."}
       description={`${user?.playlistsCount} public playlists`}
       image={`https://picsum.photos/seed/picsum${Math.floor(
         Math.random() * 400

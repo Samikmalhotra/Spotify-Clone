@@ -15,6 +15,16 @@ import { useStoreActions } from "easy-peasy";
 import { formatDate, formatTime } from "../lib/formatter";
 
 const SongTable = ({ songs }) => {
+  const newSongs = [];
+  songs.map((song) => {
+    const found = newSongs.find((s) => s.name === song.name);
+    if (!found) {
+      newSongs.push(song);
+    }
+  });
+
+  songs = newSongs;
+
   const playSongs = useStoreActions((store: any) => store.changeActiveSongs);
   const setActiveSong = useStoreActions((store: any) => store.changeActiveSong);
 
